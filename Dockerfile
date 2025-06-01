@@ -8,10 +8,14 @@ RUN apk add --no-cache --update ca-certificates certbot nginx dcron curl tini ph
 COPY . ./
 
 RUN cp .env.example .env \
+ && composer clear-cache \
  && composer install --no-dev --optimize-autoloader \
- && rm .env \
- && chown -R nginx:nginx . && chmod -R 777 storage/* bootstrap/cache 
-
+ && php artisan cache:clear || true \
+ && php artisan config:clear || true \
+ && php artisan package:discover --ansi || true \
+ && chown -R nginx:nginx . \
+ && chmod -R 777 storage/* bootstrap/cache
+ 
 RUN cp .dev/docker/default.conf /etc/nginx/conf.d/default.conf \
  && cp .dev/docker/www.conf /etc/php7/php-fpm.d/www.conf \
  && cat .dev/docker/supervisord.conf > /etc/supervisord.conf \
