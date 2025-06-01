@@ -13,11 +13,11 @@ if [ -f /app/var/.env ]; then
   echo "external vars exist."
   rm /app/.env
 
-  ln -s /app/var/.env /app/
+  ln -s /app/.env /app/
 else
   echo "external vars don't exist."
   rm /app/.env
-  touch /app/var/.env
+  touch /app/.env
 
   ## manually generate a key because key generate --force fails
   echo -e "Generating key."
@@ -49,7 +49,7 @@ fi
 
 ## check for DB up before starting the panel
 echo "Checking database status."
-until nc -z -v -w30 $DB_HOST 3306
+until nc -z -v -w30 $DB_HOST 2249
 
 do
   echo "Waiting for database connection..."
