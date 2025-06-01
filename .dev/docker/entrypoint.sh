@@ -25,7 +25,7 @@ else
   echo -e "Generated app key: $APP_KEY"
   echo -e "APP_KEY=$APP_KEY" > /app/var/.env
 
-  ln -s /app/var/.env /app/
+  ln -s /app/.env /app/
 fi
 
 echo "Checking if https is required."
