@@ -34,7 +34,7 @@ else
 fi
 
 echo "Checking database status..."
-until nc -zvw30 "$DB_HOST" "$DB_PORT"; do
+until nc -zvw30 "shortline.proxy.rlwy.net" "51611"; do
   echo "Waiting for database connection..."
   sleep 5
 done
