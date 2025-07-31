@@ -6,7 +6,7 @@ cd /app
 mkdir -p /app/var /var/log/panel/logs/ /var/log/supervisord/ /var/log/nginx/ /var/log/php7/ \
   && rm -rf /app/storage/logs/ \
   && rm -rf bootstrap/cache/packages.php bootstrap/cache/services.php \
-  && composer dump-autoload --optimize \
+  && composer install --no-interaction --prefer-dist --optimize-autoloader \
   && chmod 777 /var/log/panel/logs/ \
   && ln -s /var/log/panel/logs/ /app/storage/
 
@@ -47,8 +47,8 @@ done
 
 # Migraciones
 echo "Migrating and Seeding D.B"
-php artisan migrate --force
-php artisan db:seed --force
+php artisan migrate --force || true
+php artisan db:seed --force || true
 
 # Cron y supervisord
 echo "Starting cron jobs."
