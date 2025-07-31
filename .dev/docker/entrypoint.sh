@@ -34,7 +34,7 @@ else
 fi
 
 echo "Checking database status..."
-until nc -z -v -w30 $DB_HOST $DB_PORT; do
+until nc -z -v $DB_HOST $DB_PORT; do
   echo "Waiting for database connection..."
   sleep 5
 done
