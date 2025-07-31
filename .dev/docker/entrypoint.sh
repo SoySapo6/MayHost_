@@ -4,6 +4,8 @@ cd /app
 
 mkdir -p /app/var /var/log/panel/logs/ /var/log/supervisord/ /var/log/nginx/ /var/log/php7/ \
 && rm -rf /app/storage/logs/ \
+&& rm -rf bootstrap/cache/packages.php bootstrap/cache/services.php
+composer dump-autoload --optimize
 && chmod 777 /var/log/panel/logs/ \
 && ln -s /var/log/panel/logs/ /app/storage/
 
